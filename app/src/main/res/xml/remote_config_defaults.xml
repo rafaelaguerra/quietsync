@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>min_supported_version_code</key>
+        <value>1</value>
+    </entry>
+    <entry>
+        <key>soft_update_min_version_code</key>
+        <value>1</value>
+    </entry>
+</defaultsMap>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SyncTask wordmark branding — shown at the bottom of the splash screen -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="40dp"
+    android:viewportWidth="200"
+    android:viewportHeight="40">
+
+    <!-- "S" letterform left arc -->
+    <path
+        android:fillColor="#7C6EFF"
+        android:pathData="
+          M10,28 C10,22 14,18 20,18
+          L28,18 C30,18 32,16 32,14
+          C32,12 30,10 28,10
+          L14,10 L14,6 L28,6
+          C32.4,6 36,9.6 36,14
+          C36,18.4 32.4,22 28,22
+          L20,22 C17.8,22 16,23.8 16,26
+          C16,28.2 17.8,30 20,30
+          L34,30 L34,34 L20,34
+          C14.5,34 10,31.5 10,28 Z" />
+
+    <!-- "T" letterform -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.85"
+        android:pathData="M40,6 L60,6 L60,10 L52,10 L52,34 L48,34 L48,10 L40,10 Z" />
+
+</vector>

@@ -1,0 +1,167 @@
+<resources>
+    <string name="app_name">QuietSync</string>
+
+    <string name="top_bar_app_name">QuietSync</string>
+    <string name="report_issue_icon">⚠</string>
+    <string name="fab_add">+</string>
+    <string name="premium_badge">PREMIUM</string>
+
+    <string name="events_title">My events</string>
+    <string name="filter_all">All</string>
+    <string name="empty_filtered_icon">🔍</string>
+    <string name="empty_default_icon">📅</string>
+    <string name="empty_filtered_title">No results</string>
+    <string name="empty_default_title">No events yet</string>
+    <string name="empty_clear_title">All clear for now</string>
+    <string name="empty_filtered_subtitle">There are no events with that device mode.</string>
+    <string name="empty_default_subtitle">Tap + to create your first event with automatic mode.</string>
+    <string name="empty_clear_subtitle">Create your first event and QuietSync will handle quiet mode at the right time.</string>
+    <string name="trash_icon">🗑</string>
+    <string name="arrow_right">→</string>
+
+    <string name="main_header_title">Your schedule, in calm</string>
+    <string name="main_header_subtitle">Forget about interruptions. Create events linked to your phone\'s mode.</string>
+    <string name="snackbar_event_deleted">\"%1$s\" deleted</string>
+    <string name="content_desc_report_issue">Report an issue</string>
+    <string name="content_desc_create_event">Create event</string>
+    <string name="content_desc_delete_event">Delete event</string>
+    <string name="content_desc_refresh_events">Refresh events</string>
+    <string name="schedule_undefined">Schedule to be defined</string>
+
+    <string name="phone_state_normal">Normal</string>
+    <string name="phone_state_vibrate">Vibrate</string>
+    <string name="phone_state_silent">Silent</string>
+    <string name="phone_state_dnd">Do not disturb</string>
+    <string name="phone_state_airplane">Airplane mode</string>
+
+    <string name="create_event_title">New event</string>
+    <string name="create_header_title">Design a moment without noise</string>
+    <string name="create_header_subtitle">QuietSync will apply your device mode automatically during this event.</string>
+    <string name="content_desc_back">Back</string>
+    <string name="section_details">Details</string>
+    <string name="section_schedule">Schedule</string>
+    <string name="section_device_state">Device mode</string>
+    <string name="section_recurrence">Recurrence</string>
+    <string name="placeholder_event_title">Event title</string>
+    <string name="placeholder_event_title_example">e.g. Team meeting</string>
+    <string name="label_event_name">Event name</string>
+    <string name="error_event_name_required">Event name is required.</string>
+    <string name="helper_event_name">This name will appear on your calendar.</string>
+    <string name="placeholder_event_description">Description</string>
+    <string name="placeholder_event_location">Location (optional)</string>
+    <string name="label_start">Start</string>
+    <string name="label_end">End</string>
+    <string name="label_location">Location</string>
+    <string name="device_state_dropdown_arrow">▾</string>
+    <string name="recurring_event_title">Recurring event</string>
+    <string name="recurring_event_subtitle">Ideal for weekly routines</string>
+    <string name="label_days_of_week">Days</string>
+    <string name="label_frequency">Frequency</string>
+    <string name="label_repeat_every">Repeat every</string>
+    <string name="repeat_daily">Day</string>
+    <string name="repeat_weekly">Week</string>
+    <string name="repeat_monthly">Month</string>
+    <string name="device_mode_description">This mode turns on when the event starts and restores automatically when it ends.</string>
+    <string name="preparing_automation">Preparing your automation…</string>
+    <string name="cta_create_event">Create event</string>
+    <string name="cta_creating_event">Creating…</string>
+
+    <string name="date_picker_ok">OK</string>
+    <string name="date_picker_cancel">Cancel</string>
+    <string name="time_picker_title">Select time</string>
+    <string name="time_picker_input_toggle">Switch input mode</string>
+
+    <string name="weekday_monday_short">M</string>
+    <string name="weekday_tuesday_short">T</string>
+    <string name="weekday_wednesday_short">W</string>
+    <string name="weekday_thursday_short">T</string>
+    <string name="weekday_friday_short">F</string>
+    <string name="weekday_saturday_short">S</string>
+    <string name="weekday_sunday_short">S</string>
+
+    <string name="success_title">All set!</string>
+    <string name="success_subtitle">Your event was created and QuietSync is ready to help.</string>
+    <string name="success_event_window_message">During \"%1$s\" your phone will be on \"%2$s\" and will return to normal once it ends.</string>
+    <string name="cta_view_events">View my events</string>
+    <string name="cta_create_another_event">Create another event</string>
+
+    <string name="paywall_icon">✨</string>
+    <string name="paywall_title">QuietSync Premium</string>
+    <string name="paywall_reason_weekly_limit">You reached the free limit of 3 events per week.</string>
+    <string name="paywall_reason_edit_existing">Changing mode on existing events is a Premium feature.</string>
+    <string name="paywall_reason_default">Unlock a smoother experience with no limits.</string>
+    <string name="paywall_one_time_payment">One-time payment</string>
+    <string name="paywall_includes">Includes: unlimited events + edit mode on existing events.</string>
+    <string name="paywall_benefits_summary">Unlimited events, advanced editing, and the full experience.</string>
+    <string name="paywall_cta_unlock">Unlock Premium</string>
+    <string name="paywall_cta_processing">Processing…</string>
+    <string name="paywall_cta_restore">Restore purchase</string>
+    <string name="paywall_cta_continue_free">Continue free</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Some moments deserve silence</string>
+    <string name="onboarding_subtitle_intro">Would you like peace and quiet during every meeting, therapy session, or other moment—without having to remember to silence your phone?</string>
+    <string name="onboarding_subtitle_promise">QuietSync is the solution.</string>
+    <string name="onboarding_subtitle_action">Create an event in your calendar and link it to a device mode.</string>
+    <string name="onboarding_cta_start">Get started</string>
+    <string name="onboarding_cta_next">Next</string>
+    <string name="onboarding_cta_skip">Skip intro</string>
+
+    <string name="onboarding_perm_title">Two permissions to make it work</string>
+    <string name="onboarding_perm_subtitle">QuietSync only uses what is needed to honor your calendar and switch your phone mode. We never read your private data.</string>
+    <string name="onboarding_perm_calendar_title">Calendar access</string>
+    <string name="onboarding_perm_calendar_body">So QuietSync can create the event in your calendar and remember when to switch modes.</string>
+    <string name="onboarding_perm_mode_title">Mode access for QuietSync</string>
+    <string name="onboarding_perm_mode_body">So QuietSync can turn on Do Not Disturb, Silent or Vibrate automatically while your event is running.</string>
+    <string name="onboarding_perm_footer">You can grant or revoke these from Android Settings at any time.</string>
+
+    <!-- Permission rationales (shown before sending the user to system settings) -->
+    <string name="perm_dialog_calendar_title">Allow access to your calendar</string>
+    <string name="perm_dialog_calendar_body">QuietSync needs to read and create events on your calendar so it knows when to apply the right device mode. Tap Continue and choose \"Allow\" in the next screen.</string>
+    <string name="perm_dialog_dnd_title">Allow QuietSync to change your phone mode</string>
+    <string name="perm_dialog_dnd_body">To put your phone in Do Not Disturb, Silent or Vibrate automatically, QuietSync needs the \"Do Not Disturb access\" permission.\n\n1. Tap Open settings.\n2. Find QuietSync in the list.\n3. Turn on the switch.</string>
+    <string name="perm_dialog_continue">Continue</string>
+    <string name="perm_dialog_open_settings">Open settings</string>
+    <string name="perm_dialog_cancel">Not now</string>
+
+    <string name="msg_calendar_permission_required">You need to grant calendar permissions to continue.</string>
+    <string name="msg_email_app_unavailable">Could not open the email app.</string>
+    <string name="msg_premium_activated">Premium activated successfully.</string>
+    <string name="msg_purchase_pending">Purchase is pending confirmation.</string>
+    <string name="msg_purchase_failed_default">Could not complete purchase.</string>
+    <string name="msg_restore_success">Purchase restored successfully.</string>
+    <string name="msg_restore_not_found">No active Premium purchase was found.</string>
+    <string name="msg_dnd_access_required">Enable Do Not Disturb access to use this mode.</string>
+    <string name="msg_airplane_mode_manual">Android does not allow normal apps to turn on airplane mode automatically. Please enable it manually in Settings.</string>
+    <string name="msg_play_store_unavailable">Could not open Google Play.</string>
+    <string name="email_issue_subject">QuietSync — Issue report</string>
+    <string name="email_issue_body">Hi QuietSync team,\n\nI found the following issue:\n- \n\nDevice:\nAndroid version:\nApp version: 1.0\n</string>
+
+    <string name="msg_title_required">Title is required.</string>
+    <string name="msg_end_after_start">End date must be after start date.</string>
+    <string name="msg_conflict_existing_event">Conflict detected with \"%1$s\" (%2$s). Another mode is already scheduled for this time.</string>
+    <string name="msg_select_weekday">Select at least one weekday.</string>
+    <string name="msg_edit_mode_premium">Changing mode on existing events is a Premium feature.</string>
+    <string name="msg_weekly_limit_reached">Free limit of 3 events per week reached.</string>
+    <string name="msg_unexpected_error">An unexpected error occurred.</string>
+
+    <string name="error_calendar_create_failed">Could not create the event in your calendar.</string>
+    <string name="error_calendar_event_id">Could not read the created event identifier.</string>
+    <string name="error_calendar_no_writable">No writable calendar is available on this device.</string>
+    <string name="error_event_not_found">The selected event could not be found.</string>
+    <string name="error_premium_product_not_found">Premium product not found in Google Play.</string>
+    <string name="error_purchase_cancelled">Purchase was cancelled.</string>
+    <string name="error_billing_connection_failed">Could not connect to Google Play Billing.</string>
+    <string name="error_billing_service_unavailable">Google Play is temporarily unavailable. Try again later.</string>
+    <string name="error_billing_unavailable">Billing is not available on this device.</string>
+    <string name="error_billing_network">Network error during purchase. Check your connection and try again.</string>
+    <string name="error_billing_item_unavailable">This product is not available right now.</string>
+
+    <string name="force_update_title">Update required</string>
+    <string name="force_update_subtitle">This version is no longer supported. Please update the app to continue (minimum version code: %1$d).</string>
+    <string name="force_update_cta">Update now</string>
+    <string name="soft_update_title">Update available</string>
+    <string name="soft_update_subtitle">A new version has been downloaded. Restart now to apply the update.</string>
+    <string name="soft_update_cta_restart">Restart now</string>
+    <string name="soft_update_cta_later">Later</string>
+</resources>
