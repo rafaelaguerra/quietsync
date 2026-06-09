@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "synctask"
 include(":app")
+include(":shared")
  

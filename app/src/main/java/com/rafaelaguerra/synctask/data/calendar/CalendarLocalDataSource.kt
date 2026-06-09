@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.net.Uri
 import android.provider.CalendarContract
+import com.rafaelaguerra.synctask.data.source.CalendarDataSource
 import com.rafaelaguerra.synctask.domain.error.AppError
 import com.rafaelaguerra.synctask.domain.error.asException
 import com.rafaelaguerra.synctask.domain.model.CalendarEvent
@@ -12,12 +13,16 @@ import java.util.TimeZone
 
 class CalendarLocalDataSource(
     private val contentResolver: ContentResolver
-) {
+) : CalendarDataSource {
     private companion object {
         const val QUIETSYNC_DESCRIPTION_PREFIX = "creado por QuietSync"
     }
 
-    fun createEvent(event: CalendarEvent): Long {
+    override suspend fun createEvent(event: CalendarEvent): Long = createEventInternal(event)
+
+    override suspend fun deleteEvent(eventId: Long) = deleteEventInternal(eventId)
+
+    private fun createEventInternal(event: CalendarEvent): Long {
         val calendarId = getWritableCalendarId()
         val userDescription = event.description.trim()
         val description = if (userDescription.isEmpty()) {
@@ -60,7 +65,7 @@ class CalendarLocalDataSource(
             ?: throw AppError.CalendarEventIdUnavailable.asException()
     }
 
-    fun deleteEvent(eventId: Long) {
+    private fun deleteEventInternal(eventId: Long) {
         val eventUri = Uri.withAppendedPath(
             CalendarContract.Events.CONTENT_URI,
             eventId.toString()

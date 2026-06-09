@@ -2,5 +2,5 @@
 <resources>
     <color name="window_background">#12181A</color>
     <color name="splash_background_color">#12181A</color>
-    <color name="splash_icon_background_color">#181F22</color>
+    <color name="splash_icon_background_color">#12181A</color>
 </resources>

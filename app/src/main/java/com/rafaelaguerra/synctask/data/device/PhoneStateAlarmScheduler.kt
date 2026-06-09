@@ -5,15 +5,16 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import com.rafaelaguerra.synctask.data.receiver.PhoneStateReceiver
+import com.rafaelaguerra.synctask.data.source.PhoneStateScheduler
 import com.rafaelaguerra.synctask.domain.model.PhoneState
 
 class PhoneStateAlarmScheduler(
     context: Context
-) {
+) : PhoneStateScheduler {
     private val appContext = context.applicationContext
     private val alarmManager = appContext.getSystemService(AlarmManager::class.java)
 
-    fun schedulePhoneStateChange(
+    override fun schedulePhoneStateChange(
         eventId: Long,
         startDateTimeMillis: Long,
         endDateTimeMillis: Long,
@@ -30,7 +31,7 @@ class PhoneStateAlarmScheduler(
         scheduleAlarm(endDateTimeMillis, restoreStateIntent)
     }
 
-    fun cancelPhoneStateChange(eventId: Long) {
+    override fun cancelPhoneStateChange(eventId: Long) {
         val applyStateIntent = buildApplyStateIntent(eventId, PhoneState.NORMAL)
         val restoreStateIntent = buildRestoreStateIntent(eventId)
         alarmManager?.cancel(applyStateIntent)

@@ -1,15 +1,100 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+# ─── OS ───────────────────────────────────────────────────────────────────────
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+Thumbs.db
+
+# ─── Android / Gradle ───────────────────────────────────────────────────────
+*.iml
+.gradle/
 local.properties
+**/local.properties
+
+# Build outputs (all modules)
+build/
+**/build/
+
+# Android Studio / IntelliJ
+.idea/
+*.ipr
+*.iws
+
+# Android native / profiling
+.externalNativeBuild/
+.cxx/
+captures/
+*.hprof
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Signing (never commit)
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+
+# ─── Kotlin ───────────────────────────────────────────────────────────────────
+.kotlin/
+
+# ─── Kotlin Multiplatform / Compose ───────────────────────────────────────────
+# Generated compose resources and KMP build artifacts live under **/build/
+
+# ─── iOS / Xcode ──────────────────────────────────────────────────────────────
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+**/xcuserdata/
+DerivedData/
+**/DerivedData/
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.swp
+*~.nib
+
+# CocoaPods
+Pods/
+**/Pods/
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode workspace user data
+*.xcworkspace/xcuserdata/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# ─── Secrets & local config (use *.example templates in repo) ─────────────────
+.env
+.env.*
+!.env.example
+secrets.properties
+**/secrets.properties
+
+# Firebase / Google Services — keep out of git unless your team explicitly shares it.
+# Uncomment if you prefer each dev to use their own copy:
+# app/google-services.json
+# GoogleService-Info.plist
+
+# ─── Misc tooling ─────────────────────────────────────────────────────────────
+*.log

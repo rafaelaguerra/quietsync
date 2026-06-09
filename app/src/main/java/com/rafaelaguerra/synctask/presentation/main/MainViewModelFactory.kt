@@ -11,20 +11,7 @@ class MainViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(
-                createCalendarEventUseCase = appContainer.createCalendarEventUseCase,
-                schedulePhoneStateForEventUseCase = appContainer.schedulePhoneStateForEventUseCase,
-                saveAppManagedEventUseCase = appContainer.saveAppManagedEventUseCase,
-                getAppManagedEventsUseCase = appContainer.getAppManagedEventsUseCase,
-                cleanupExpiredManagedEventsUseCase = appContainer.cleanupExpiredManagedEventsUseCase,
-                removeAppManagedEventUseCase = appContainer.removeAppManagedEventUseCase,
-                updateAppManagedEventPhoneStateUseCase = appContainer.updateAppManagedEventPhoneStateUseCase,
-                observePremiumStatusUseCase = appContainer.observePremiumStatusUseCase,
-                refreshPremiumStatusUseCase = appContainer.refreshPremiumStatusUseCase,
-                getPremiumPriceUseCase = appContainer.getPremiumPriceUseCase,
-                canCreateEventThisWeekUseCase = appContainer.canCreateEventThisWeekUseCase,
-                canEditExistingEventModeUseCase = appContainer.canEditExistingEventModeUseCase
-            ) as T
+            return appContainer.createMainViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

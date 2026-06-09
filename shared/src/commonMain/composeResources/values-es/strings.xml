@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name">QuietSync</string>
+
+    <string name="top_bar_app_name">QuietSync</string>
+    <string name="report_issue_icon">⚠</string>
+    <string name="fab_add">+</string>
+    <string name="premium_badge">PREMIUM</string>
+
+    <string name="events_title">Mis eventos</string>
+    <string name="filter_all">Todos</string>
+    <string name="empty_filtered_icon">🔍</string>
+    <string name="empty_default_icon">📅</string>
+    <string name="empty_filtered_title">Sin resultados</string>
+    <string name="empty_default_title">Sin eventos aún</string>
+    <string name="empty_clear_title">Todo despejado por ahora</string>
+    <string name="empty_filtered_subtitle">No hay eventos con ese modo de dispositivo.</string>
+    <string name="empty_default_subtitle">Pulsa + para crear tu primer evento con estado automático.</string>
+    <string name="empty_clear_subtitle">Crea tu primer evento y QuietSync se encargará del silencio en el momento adecuado.</string>
+    <string name="trash_icon">🗑</string>
+    <string name="arrow_right">→</string>
+
+    <string name="main_header_title">Tu agenda, en calma</string>
+    <string name="main_header_subtitle">Olvídate de las interrupciones: crea tus eventos vinculados al modo de tu móvil.</string>
+    <string name="snackbar_event_deleted">\"%1$s\" eliminado</string>
+    <string name="content_desc_report_issue">Reportar incidencia</string>
+    <string name="content_desc_create_event">Crear evento</string>
+    <string name="content_desc_delete_event">Eliminar evento</string>
+    <string name="content_desc_refresh_events">Actualizar eventos</string>
+    <string name="schedule_undefined">Horario por definir</string>
+
+    <string name="phone_state_normal">Normal</string>
+    <string name="phone_state_vibrate">Vibración</string>
+    <string name="phone_state_silent">Silencio</string>
+    <string name="phone_state_dnd">No molestar</string>
+    <string name="phone_state_airplane">Modo avión</string>
+
+    <string name="create_event_title">Nuevo evento</string>
+    <string name="create_header_title">Diseña un momento sin ruido</string>
+    <string name="create_header_subtitle">QuietSync aplicará el modo del móvil automáticamente durante este evento.</string>
+    <string name="content_desc_back">Volver</string>
+    <string name="section_details">Detalles</string>
+    <string name="section_schedule">Horario</string>
+    <string name="section_device_state">Modo del dispositivo</string>
+    <string name="section_recurrence">Repetición</string>
+    <string name="placeholder_event_title">Título del evento</string>
+    <string name="placeholder_event_title_example">Ej. Reunión con el equipo</string>
+    <string name="label_event_name">Nombre del evento</string>
+    <string name="error_event_name_required">El nombre del evento es obligatorio.</string>
+    <string name="helper_event_name">Este nombre aparecerá en tu calendario.</string>
+    <string name="placeholder_event_description">Descripción</string>
+    <string name="placeholder_event_location">Lugar (opcional)</string>
+    <string name="label_start">Inicio</string>
+    <string name="label_end">Fin</string>
+    <string name="label_location">Lugar</string>
+    <string name="device_state_dropdown_arrow">▾</string>
+    <string name="recurring_event_title">Evento recurrente</string>
+    <string name="recurring_event_subtitle">Ideal para rutinas semanales</string>
+    <string name="label_days_of_week">Días</string>
+    <string name="label_frequency">Frecuencia</string>
+    <string name="label_repeat_every">Repetir cada</string>
+    <string name="repeat_daily">Día</string>
+    <string name="repeat_weekly">Semana</string>
+    <string name="repeat_monthly">Mes</string>
+    <string name="device_mode_description">Este modo se activará al iniciar el evento y se restaurará automáticamente al finalizar.</string>
+    <string name="preparing_automation">Preparando tu automatización…</string>
+    <string name="cta_create_event">Crear evento</string>
+    <string name="cta_creating_event">Creando…</string>
+
+    <string name="date_picker_ok">Aceptar</string>
+    <string name="date_picker_cancel">Cancelar</string>
+    <string name="time_picker_title">Selecciona la hora</string>
+    <string name="time_picker_input_toggle">Cambiar modo de entrada</string>
+
+    <string name="weekday_monday_short">L</string>
+    <string name="weekday_tuesday_short">M</string>
+    <string name="weekday_wednesday_short">X</string>
+    <string name="weekday_thursday_short">J</string>
+    <string name="weekday_friday_short">V</string>
+    <string name="weekday_saturday_short">S</string>
+    <string name="weekday_sunday_short">D</string>
+
+    <string name="success_title">¡Todo listo!</string>
+    <string name="success_subtitle">Tu evento se creó y QuietSync ya está preparado para ayudarte.</string>
+    <string name="success_event_window_message">Durante \"%1$s\" tu móvil estará en \"%2$s\" y volverá a la normalidad cuando termine.</string>
+    <string name="cta_view_events">Ver mis eventos</string>
+    <string name="cta_create_another_event">Crear otro evento</string>
+
+    <string name="paywall_icon">✨</string>
+    <string name="paywall_title">QuietSync Premium</string>
+    <string name="paywall_reason_weekly_limit">Has alcanzado el límite gratis de 3 eventos por semana.</string>
+    <string name="paywall_reason_edit_existing">Cambiar el modo en eventos existentes es una función Premium.</string>
+    <string name="paywall_reason_default">Desbloquea una experiencia más fluida y sin límites.</string>
+    <string name="paywall_one_time_payment">Pago único</string>
+    <string name="paywall_includes">Incluye: eventos ilimitados + edición de modo en eventos existentes.</string>
+    <string name="paywall_benefits_summary">Eventos ilimitados, edición avanzada y experiencia completa.</string>
+    <string name="paywall_cta_unlock">Desbloquear Premium</string>
+    <string name="paywall_cta_processing">Procesando…</string>
+    <string name="paywall_cta_restore">Restaurar compra</string>
+    <string name="paywall_cta_continue_free">Seguir gratis</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Hay momentos que merecen silencio</string>
+    <string name="onboarding_subtitle_intro">¿Te encantaría estar tranquilo/a en cada reunión, sesión de terapia u otro momento sin tener que acordarte de poner el móvil en silencio?</string>
+    <string name="onboarding_subtitle_promise">QuietSync es la solución.</string>
+    <string name="onboarding_subtitle_action">Crea un evento en tu calendario y vincúlalo a un modo de tu móvil.</string>
+    <string name="onboarding_cta_start">Empezar</string>
+    <string name="onboarding_cta_next">Siguiente</string>
+    <string name="onboarding_cta_skip">Saltar intro</string>
+
+    <string name="onboarding_perm_title">Dos permisos para que todo funcione</string>
+    <string name="onboarding_perm_subtitle">QuietSync solo usa lo necesario para respetar tu calendario y cambiar el modo de tu móvil. Nunca leemos tus datos privados.</string>
+    <string name="onboarding_perm_calendar_title">Acceso al calendario</string>
+    <string name="onboarding_perm_calendar_body">Para que QuietSync pueda crear el evento en tu calendario y recordar cuándo cambiar de modo.</string>
+    <string name="onboarding_perm_mode_title">Acceso a los modos para QuietSync</string>
+    <string name="onboarding_perm_mode_body">Para que QuietSync pueda activar No molestar, Silencio o Vibración automáticamente mientras dure tu evento.</string>
+    <string name="onboarding_perm_footer">Puedes conceder o revocar estos permisos desde Ajustes de Android cuando quieras.</string>
+
+    <string name="onboarding_perm_title_ios">Acceso al calendario para QuietSync</string>
+    <string name="onboarding_perm_subtitle_ios">QuietSync necesita tu calendario para crear eventos de enfoque. Solo accedemos a los eventos creados por la app.</string>
+    <string name="onboarding_perm_calendar_body_ios">QuietSync añade eventos de enfoque a tu calendario para que veas cuándo planeaste desconectar.</string>
+    <string name="onboarding_perm_footer_ios">Puedes cambiarlo cuando quieras en Ajustes → QuietSync → Calendarios.</string>
+
+    <!-- Diálogos de permisos -->
+    <string name="perm_dialog_calendar_title">Permite el acceso a tu calendario</string>
+    <string name="perm_dialog_calendar_body">QuietSync necesita leer y crear eventos en tu calendario para saber cuándo aplicar el modo adecuado del dispositivo. Pulsa Continuar y elige \"Permitir\" en la siguiente pantalla.</string>
+    <string name="perm_dialog_dnd_title">Permite a QuietSync cambiar el modo del móvil</string>
+    <string name="perm_dialog_dnd_body">Para poner tu móvil en No molestar, Silencio o Vibración automáticamente, QuietSync necesita el permiso \"Acceso a No molestar\".\n\n1. Pulsa Abrir ajustes.\n2. Busca QuietSync en la lista.\n3. Activa el interruptor.</string>
+    <string name="perm_dialog_continue">Continuar</string>
+    <string name="perm_dialog_open_settings">Abrir ajustes</string>
+    <string name="perm_dialog_cancel">Ahora no</string>
+
+    <string name="msg_calendar_permission_required">Debes conceder permisos de calendario para continuar.</string>
+    <string name="msg_email_app_unavailable">No se pudo abrir la app de correo.</string>
+    <string name="msg_premium_activated">Premium activado correctamente.</string>
+    <string name="msg_purchase_pending">La compra está pendiente de confirmación.</string>
+    <string name="msg_purchase_failed_default">No se pudo completar la compra.</string>
+    <string name="msg_restore_success">Compra restaurada correctamente.</string>
+    <string name="msg_restore_not_found">No se encontró una compra Premium activa.</string>
+    <string name="msg_dnd_access_required">Activa el acceso a No molestar para usar este modo.</string>
+    <string name="msg_airplane_mode_manual">Android no permite activar el modo avión automáticamente en apps normales. Actívalo manualmente desde Ajustes.</string>
+    <string name="msg_play_store_unavailable">No se pudo abrir Google Play.</string>
+    <string name="email_issue_subject">QuietSync — Reporte de incidencia</string>
+    <string name="email_issue_body">Hola, equipo de QuietSync:\n\nEncontré el siguiente problema:\n- \n\nDispositivo:\nVersión de Android:\nVersión de la app: 1.0\n</string>
+
+    <string name="msg_title_required">El título es obligatorio.</string>
+    <string name="msg_end_after_start">La fecha de fin debe ser posterior al inicio.</string>
+    <string name="msg_conflict_existing_event">Conflicto detectado con \"%1$s\" (%2$s). Ya hay otro modo en el mismo horario.</string>
+    <string name="msg_select_weekday">Selecciona al menos un día de la semana.</string>
+    <string name="msg_edit_mode_premium">Cambiar el modo en eventos existentes es una función Premium.</string>
+    <string name="msg_weekly_limit_reached">Límite gratis de 3 eventos por semana alcanzado.</string>
+    <string name="msg_unexpected_error">Ocurrió un error inesperado.</string>
+
+    <string name="error_calendar_create_failed">No se pudo crear el evento en el calendario.</string>
+    <string name="error_calendar_event_id">No se pudo obtener el identificador del evento creado.</string>
+    <string name="error_calendar_no_writable">No hay calendarios disponibles para escribir eventos en este dispositivo.</string>
+    <string name="error_event_not_found">No se encontró el evento seleccionado.</string>
+    <string name="error_premium_product_not_found">No se encontró el producto Premium en Google Play.</string>
+    <string name="error_purchase_cancelled">Compra cancelada.</string>
+    <string name="error_billing_connection_failed">No se pudo conectar con Google Play Billing.</string>
+    <string name="error_billing_service_unavailable">Google Play no está disponible temporalmente. Inténtalo de nuevo más tarde.</string>
+    <string name="error_billing_unavailable">Las compras no están disponibles en este dispositivo.</string>
+    <string name="error_billing_network">Error de red durante la compra. Comprueba tu conexión e inténtalo de nuevo.</string>
+    <string name="error_billing_item_unavailable">Este producto no está disponible en este momento.</string>
+
+    <string name="force_update_title">Actualización obligatoria</string>
+    <string name="force_update_subtitle">Esta versión ya no es compatible. Actualiza la app para continuar (código mínimo de versión: %1$d).</string>
+    <string name="force_update_cta">Actualizar ahora</string>
+    <string name="soft_update_title">Actualización disponible</string>
+    <string name="soft_update_subtitle">Se descargó una nueva versión. Reinicia ahora para aplicarla.</string>
+    <string name="soft_update_cta_restart">Reiniciar ahora</string>
+    <string name="soft_update_cta_later">Más tarde</string>
+</resources>

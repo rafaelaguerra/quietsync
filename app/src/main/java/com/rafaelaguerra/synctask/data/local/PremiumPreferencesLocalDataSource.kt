@@ -1,13 +1,14 @@
 package com.rafaelaguerra.synctask.data.local
 
 import android.content.Context
+import com.rafaelaguerra.synctask.data.source.PremiumPreferencesStorage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class PremiumPreferencesLocalDataSource(
     context: Context
-) {
+) : PremiumPreferencesStorage {
     private val preferences = context.applicationContext.getSharedPreferences(
         PREFERENCES_NAME,
         Context.MODE_PRIVATE
@@ -17,9 +18,9 @@ class PremiumPreferencesLocalDataSource(
         preferences.getBoolean(KEY_IS_PREMIUM, false)
     )
 
-    fun observeIsPremium(): StateFlow<Boolean> = premiumState.asStateFlow()
+    override fun observeIsPremium(): StateFlow<Boolean> = premiumState.asStateFlow()
 
-    fun setIsPremium(isPremium: Boolean) {
+    override fun setIsPremium(isPremium: Boolean) {
         premiumState.value = isPremium
         preferences.edit().putBoolean(KEY_IS_PREMIUM, isPremium).apply()
     }

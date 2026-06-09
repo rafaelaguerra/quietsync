@@ -33,13 +33,9 @@ import com.rafaelaguerra.synctask.domain.model.PhoneState
 import com.rafaelaguerra.synctask.data.device.PhoneStateController
 import com.rafaelaguerra.synctask.presentation.common.UiText
 import com.rafaelaguerra.synctask.presentation.common.toUiText
-import com.rafaelaguerra.synctask.presentation.main.CreateEventScreen
-import com.rafaelaguerra.synctask.presentation.main.EventSuccessScreen
-import com.rafaelaguerra.synctask.presentation.main.MainScreen
+import com.rafaelaguerra.synctask.presentation.SynctaskApp
 import com.rafaelaguerra.synctask.presentation.main.MainViewModel
 import com.rafaelaguerra.synctask.presentation.main.MainViewModelFactory
-import com.rafaelaguerra.synctask.presentation.main.PremiumPaywallScreen
-import com.rafaelaguerra.synctask.presentation.onboarding.OnboardingScreen
 import com.rafaelaguerra.synctask.presentation.startup.ForceUpdateScreen
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.InstallStatus
@@ -122,7 +118,7 @@ class MainActivity : ComponentActivity() {
             !granted -> {
                 shouldCreateEventAfterPermission = false
                 pendingRemoveEventId = null
-                mainViewModel.showMessage(UiText.Resource(R.string.msg_calendar_permission_required))
+                mainViewModel.showMessage(UiText.Dynamic(getString(R.string.msg_calendar_permission_required)))
             }
         }
     }
@@ -164,66 +160,24 @@ class MainActivity : ComponentActivity() {
 
                     StartupGateState.Ready -> {
                         val uiState by mainViewModel.uiState.collectAsStateWithLifecycle()
-                        val createdEventPreview = uiState.createdEventPreview
 
-                        when {
-                            showOnboarding -> {
-                                OnboardingScreen(
-                                    onFinish = ::finishOnboardingWithPermissions,
-                                    onSkip = ::skipOnboarding
-                                )
-                            }
-
-                            uiState.showPaywall -> {
-                                PremiumPaywallScreen(
-                                    reason = uiState.paywallReason,
-                                    premiumPriceLabel = uiState.premiumPriceLabel,
-                                    isPurchaseInProgress = uiState.isPurchaseInProgress,
-                                    onPurchaseRequested = ::onPremiumPurchaseRequested,
-                                    onRestoreRequested = ::onRestorePurchaseRequested,
-                                    onCloseRequested = mainViewModel::hidePaywall
-                                )
-                            }
-
-                            createdEventPreview != null -> {
-                                EventSuccessScreen(
-                                    preview = createdEventPreview,
-                                    onGoToList = mainViewModel::goToEventList,
-                                    onCreateAnotherEvent = mainViewModel::onCreateAnotherEvent
-                                )
-                            }
-
-                            uiState.isCreateEventVisible -> {
-                                CreateEventScreen(
-                                    uiState = uiState,
-                                    onBack = mainViewModel::hideCreateEvent,
-                                    onTitleChange = mainViewModel::onTitleChange,
-                                    onDescriptionChange = mainViewModel::onDescriptionChange,
-                                    onLocationChange = mainViewModel::onLocationChange,
-                                    onStartDateTimeChange = mainViewModel::onStartDateTimeChange,
-                                    onEndDateTimeChange = mainViewModel::onEndDateTimeChange,
-                                    onPhoneStateSelected = mainViewModel::onPhoneStateSelected,
-                                    onRecurringToggled = mainViewModel::onRecurringToggled,
-                                    onRecurrenceDayToggled = mainViewModel::onRecurrenceDayToggled,
-                                    onRecurrencePeriodSelected = mainViewModel::onRecurrencePeriodSelected,
-                                    onCreateEventRequested = ::createEventIfPossible
-                                )
-                            }
-
-                            else -> {
-                                MainScreen(
-                                    uiState = uiState,
-                                    canShowSwipeHint = swipeHintShownCount < MAX_SWIPE_HINT_SHOWS,
-                                    onSwipeHintShown = ::onSwipeHintShown,
-                                    onRemoveEventRequested = ::removeEventIfPossible,
-                                    onFilterSelected = mainViewModel::onFilterSelected,
-                                    onCreateEventRequested = ::onCreateEventRequested,
-                                    onReportIssueRequested = ::onReportIssueRequested,
-                                    onRefreshRequested = mainViewModel::loadAppManagedEvents,
-                                    onMessageShown = mainViewModel::clearMessage
-                                )
-                            }
-                        }
+                        SynctaskApp(
+                            uiState = uiState,
+                            showOnboarding = showOnboarding,
+                            canShowSwipeHint = swipeHintShownCount < MAX_SWIPE_HINT_SHOWS,
+                            onSwipeHintShown = ::onSwipeHintShown,
+                            onFinishOnboarding = ::finishOnboardingWithPermissions,
+                            onSkipOnboarding = ::skipOnboarding,
+                            onCreateEventRequested = ::onCreateEventRequested,
+                            onCreateEventConfirmed = ::createEventIfPossible,
+                            onRemoveEventRequested = ::removeEventIfPossible,
+                            onReportIssueRequested = ::onReportIssueRequested,
+                            onRefreshRequested = mainViewModel::loadAppManagedEvents,
+                            onMessageShown = mainViewModel::clearMessage,
+                            onPremiumPurchaseRequested = ::onPremiumPurchaseRequested,
+                            onRestorePurchaseRequested = ::onRestorePurchaseRequested,
+                            viewModel = mainViewModel
+                        )
 
                         if (showCalendarRationale) {
                             PermissionRationaleDialog(
@@ -414,7 +368,7 @@ class MainActivity : ComponentActivity() {
         val intent = Intent(Intent.ACTION_SENDTO, emailUri)
         runCatching { startActivity(intent) }
             .onFailure {
-                mainViewModel.showMessage(UiText.Resource(R.string.msg_email_app_unavailable))
+                mainViewModel.showMessage(UiText.Dynamic(getString(R.string.msg_email_app_unavailable)))
             }
     }
 
@@ -427,9 +381,9 @@ class MainActivity : ComponentActivity() {
                     mainViewModel.refreshPremiumStatus(showErrors = true)
                     if (unlocked) {
                         mainViewModel.hidePaywall()
-                        mainViewModel.showMessage(UiText.Resource(R.string.msg_premium_activated))
+                        mainViewModel.showMessage(UiText.Dynamic(getString(R.string.msg_premium_activated)))
                     } else {
-                        mainViewModel.showMessage(UiText.Resource(R.string.msg_purchase_pending))
+                        mainViewModel.showMessage(UiText.Dynamic(getString(R.string.msg_purchase_pending)))
                     }
                 }
                 .onFailure { error ->
@@ -446,9 +400,9 @@ class MainActivity : ComponentActivity() {
             mainViewModel.setPurchaseInProgress(false)
             if (mainViewModel.uiState.value.isPremium) {
                 mainViewModel.hidePaywall()
-                mainViewModel.showMessage(UiText.Resource(R.string.msg_restore_success))
+                mainViewModel.showMessage(UiText.Dynamic(getString(R.string.msg_restore_success)))
             } else {
-                mainViewModel.showMessage(UiText.Resource(R.string.msg_restore_not_found))
+                mainViewModel.showMessage(UiText.Dynamic(getString(R.string.msg_restore_not_found)))
             }
         }
     }
@@ -473,7 +427,7 @@ class MainActivity : ComponentActivity() {
         if (mainViewModel.uiState.value.selectedPhoneState == PhoneState.AIRPLANE_MODE) {
             val phoneStateController = PhoneStateController(this)
             if (!phoneStateController.canUseAirplaneModeAutomation()) {
-                mainViewModel.showMessage(UiText.Resource(R.string.msg_airplane_mode_manual))
+                mainViewModel.showMessage(UiText.Dynamic(getString(R.string.msg_airplane_mode_manual)))
                 openAirplaneModeSettings()
                 return
             }

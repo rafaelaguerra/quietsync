@@ -13,6 +13,7 @@ import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import com.rafaelaguerra.synctask.data.local.PremiumPreferencesLocalDataSource
+import com.rafaelaguerra.synctask.data.source.PremiumBillingDataSource
 import com.rafaelaguerra.synctask.domain.error.AppError
 import com.rafaelaguerra.synctask.domain.error.asException
 import kotlinx.coroutines.CoroutineScope
@@ -28,7 +29,7 @@ import kotlin.coroutines.resumeWithException
 class PlayBillingDataSource(
     context: Context,
     private val premiumPreferences: PremiumPreferencesLocalDataSource
-) : PurchasesUpdatedListener {
+) : PurchasesUpdatedListener, PremiumBillingDataSource {
 
     private val appContext = context.applicationContext
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -40,7 +41,7 @@ class PlayBillingDataSource(
         .enablePendingPurchases()
         .build()
 
-    suspend fun queryPremiumPriceLabel(): Result<String> {
+    override suspend fun queryPremiumPriceLabel(): Result<String> {
         return runCatching {
             val details = queryPremiumProductDetails()
             val formattedPrice = details?.oneTimePurchaseOfferDetails?.formattedPrice
@@ -48,7 +49,7 @@ class PlayBillingDataSource(
         }
     }
 
-    suspend fun refreshPremiumEntitlement(): Result<Boolean> {
+    override suspend fun refreshPremiumEntitlement(): Result<Boolean> {
         return runCatching {
             ensureConnected()
             val purchases = queryPurchases()
