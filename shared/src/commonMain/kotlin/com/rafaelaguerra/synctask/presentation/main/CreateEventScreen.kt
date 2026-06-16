@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -118,7 +119,6 @@ fun CreateEventScreen(
     onRecurrencePeriodSelected: (RepeatPeriod) -> Unit,
     onCreateEventRequested: () -> Unit
 ) {
-    var modeMenuExpanded by remember { mutableStateOf(false) }
     var hasTriedSubmit by rememberSaveable { mutableStateOf(false) }
     val trimmedTitle = uiState.title.trim()
     val titleHasError = hasTriedSubmit && trimmedTitle.isEmpty()
@@ -301,75 +301,10 @@ fun CreateEventScreen(
                     }
                 }
 
-                CalmSection(title = stringResource(Res.string.section_device_state)) {
-                    Text(
-                        text = stringResource(Res.string.device_mode_description),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        Card(
-                            shape = RoundedCornerShape(18.dp),
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer
-                            ),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .border(
-                                    width = 1.dp,
-                                    color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.32f),
-                                    shape = RoundedCornerShape(18.dp)
-                                )
-                                .clickable { modeMenuExpanded = true }
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 14.dp, vertical = 13.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Row(
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .size(10.dp)
-                                            .background(
-                                                uiState.selectedPhoneState.cardColor(),
-                                                CircleShape
-                                            )
-                                    )
-                                    Text(
-                                        text = uiState.selectedPhoneState.displayLabel(),
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        fontWeight = FontWeight.Medium,
-                                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                                    )
-                                }
-                                Text(
-                                    text = "▾",
-                                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
-                                )
-                            }
-                        }
-                        DropdownMenu(
-                            expanded = modeMenuExpanded,
-                            onDismissRequest = { modeMenuExpanded = false }
-                        ) {
-                            PhoneState.entries.forEach { state ->
-                                DropdownMenuItem(
-                                    text = { Text(state.displayLabel()) },
-                                    onClick = {
-                                        modeMenuExpanded = false
-                                        onPhoneStateSelected(state)
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
+                DeviceModeSection(
+                    selectedPhoneState = uiState.selectedPhoneState,
+                    onPhoneStateSelected = onPhoneStateSelected
+                )
 
                 CalmPrimaryButton(
                     text = if (uiState.isLoading) {
@@ -557,6 +492,105 @@ private fun BrandedDateTimePicker(
 }
 
 private enum class DateTimePickerStage { Date, Time }
+
+@Composable
+private fun DeviceModeSection(
+    selectedPhoneState: PhoneState,
+    onPhoneStateSelected: (PhoneState) -> Unit
+) {
+    var modeMenuExpanded by remember { mutableStateOf(false) }
+    val sectionShape = RoundedCornerShape(24.dp)
+    val selectorShape = RoundedCornerShape(16.dp)
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.42f),
+                shape = sectionShape
+            )
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.14f),
+                shape = sectionShape
+            )
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(width = 4.dp, height = 18.dp)
+                    .background(
+                        color = MaterialTheme.colorScheme.primary,
+                        shape = RoundedCornerShape(999.dp)
+                    )
+            )
+            Text(
+                text = stringResource(Res.string.section_device_state),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        }
+
+        Text(
+            text = stringResource(Res.string.device_mode_description),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.78f)
+        )
+
+        Box(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = MaterialTheme.colorScheme.surface,
+                        shape = selectorShape
+                    )
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
+                        shape = selectorShape
+                    )
+                    .clickable { modeMenuExpanded = true }
+                    .padding(horizontal = 14.dp, vertical = 14.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = selectedPhoneState.displayLabel(),
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Icon(
+                    imageVector = Icons.Filled.KeyboardArrowDown,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            DropdownMenu(
+                expanded = modeMenuExpanded,
+                onDismissRequest = { modeMenuExpanded = false }
+            ) {
+                PhoneState.entries.forEach { state ->
+                    DropdownMenuItem(
+                        text = { Text(state.displayLabel()) },
+                        onClick = {
+                            modeMenuExpanded = false
+                            onPhoneStateSelected(state)
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
 
 @Composable
 private fun CalmSection(

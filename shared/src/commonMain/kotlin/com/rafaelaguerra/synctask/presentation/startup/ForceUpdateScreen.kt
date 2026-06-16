@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafaelaguerra.synctask.presentation.components.CalmPrimaryButton
 import com.rafaelaguerra.synctask.presentation.components.CalmScreenBackground
+import com.rafaelaguerra.synctask.presentation.components.RemoteLottie
 import com.rafaelaguerra.synctask.resources.Res
 import com.rafaelaguerra.synctask.resources.force_update_cta
 import com.rafaelaguerra.synctask.resources.force_update_subtitle
@@ -22,7 +24,6 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ForceUpdateScreen(
-    minSupportedVersionCode: Long,
     onUpdateClick: () -> Unit
 ) {
     CalmScreenBackground(modifier = Modifier.fillMaxSize()) {
@@ -33,7 +34,13 @@ fun ForceUpdateScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            RemoteLottie(
+                url = FORCE_UPDATE_LOTTIE_JSON_URL,
+                modifier = Modifier.size(180.dp)
+            )
+
             Text(
+                modifier = Modifier.padding(top = 20.dp),
                 text = stringResource(Res.string.force_update_title),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -42,10 +49,7 @@ fun ForceUpdateScreen(
 
             Text(
                 modifier = Modifier.padding(top = 12.dp),
-                text = stringResource(
-                    Res.string.force_update_subtitle,
-                    minSupportedVersionCode
-                ),
+                text = stringResource(Res.string.force_update_subtitle),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
@@ -61,3 +65,6 @@ fun ForceUpdateScreen(
         }
     }
 }
+
+private const val FORCE_UPDATE_LOTTIE_JSON_URL =
+    "https://assets-v2.lottiefiles.com/a/44685b66-1172-11ee-a438-4fd32e43aa25/KRKfK1osuB.json"

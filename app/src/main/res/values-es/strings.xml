@@ -158,7 +158,7 @@
     <string name="error_billing_item_unavailable">Este producto no está disponible en este momento.</string>
 
     <string name="force_update_title">Actualización obligatoria</string>
-    <string name="force_update_subtitle">Esta versión ya no es compatible. Actualiza la app para continuar (código mínimo de versión: %1$d).</string>
+    <string name="force_update_subtitle">Esta versión ya no es compatible. Actualiza la app para continuar.</string>
     <string name="force_update_cta">Actualizar ahora</string>
     <string name="soft_update_title">Actualización disponible</string>
     <string name="soft_update_subtitle">Se descargó una nueva versión. Reinicia ahora para aplicarla.</string>

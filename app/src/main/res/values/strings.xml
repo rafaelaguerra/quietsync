@@ -158,7 +158,7 @@
     <string name="error_billing_item_unavailable">This product is not available right now.</string>
 
     <string name="force_update_title">Update required</string>
-    <string name="force_update_subtitle">This version is no longer supported. Please update the app to continue (minimum version code: %1$d).</string>
+    <string name="force_update_subtitle">This version is no longer supported. Please update the app to continue.</string>
     <string name="force_update_cta">Update now</string>
     <string name="soft_update_title">Update available</string>
     <string name="soft_update_subtitle">A new version has been downloaded. Restart now to apply the update.</string>

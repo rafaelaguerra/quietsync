@@ -11,9 +11,8 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
-import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
@@ -27,18 +26,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.rafaelaguerra.synctask.domain.model.PhoneState
+import androidx.lifecycle.lifecycleScope
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.InstallStatus
 import com.rafaelaguerra.synctask.data.device.PhoneStateController
+import com.rafaelaguerra.synctask.domain.model.PhoneState
+import com.rafaelaguerra.synctask.presentation.SynctaskApp
 import com.rafaelaguerra.synctask.presentation.common.UiText
 import com.rafaelaguerra.synctask.presentation.common.toUiText
-import com.rafaelaguerra.synctask.presentation.SynctaskApp
 import com.rafaelaguerra.synctask.presentation.main.MainViewModel
 import com.rafaelaguerra.synctask.presentation.main.MainViewModelFactory
 import com.rafaelaguerra.synctask.presentation.startup.ForceUpdateScreen
-import com.google.android.play.core.install.InstallStateUpdatedListener
-import com.google.android.play.core.install.model.InstallStatus
 import com.rafaelaguerra.synctask.ui.theme.SynctaskTheme
 import kotlinx.coroutines.launch
 
@@ -58,7 +57,6 @@ class MainActivity : ComponentActivity() {
     private var swipeHintShownCount by mutableStateOf(0)
     private var showOnboarding by mutableStateOf(false)
     private var startupGateState by mutableStateOf(StartupGateState.Checking)
-    private var minSupportedVersionCode by mutableStateOf(0L)
     private var showFlexibleUpdateDialog by mutableStateOf(false)
     private var pendingInAppUpdateRequest: InAppUpdateRequestType? = null
     private var hasRequestedSoftUpdate = false
@@ -153,7 +151,6 @@ class MainActivity : ComponentActivity() {
 
                     StartupGateState.UpdateRequired -> {
                         ForceUpdateScreen(
-                            minSupportedVersionCode = minSupportedVersionCode,
                             onUpdateClick = ::openPlayStoreForUpdate
                         )
                     }
@@ -269,8 +266,6 @@ class MainActivity : ComponentActivity() {
 
     private fun checkAppVersionGate() {
         appContainer.appVersionGatekeeper.checkVersion { result ->
-            minSupportedVersionCode = result.minSupportedVersionCode
-
             if (result.isHardUpdateRequired) {
                 startupGateState = StartupGateState.Checking
                 startImmediateUpdateFlow()
