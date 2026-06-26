@@ -25,7 +25,7 @@ android {
         applicationId = "com.rafaelaguerra.synctask"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
+        versionCode = 1782506535
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
