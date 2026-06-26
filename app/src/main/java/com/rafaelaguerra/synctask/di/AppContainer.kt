@@ -3,6 +3,7 @@ package com.rafaelaguerra.synctask.di
 import android.content.Context
 import com.rafaelaguerra.synctask.data.billing.PlayBillingDataSource
 import com.rafaelaguerra.synctask.data.calendar.CalendarLocalDataSource
+import com.rafaelaguerra.synctask.data.crash.CrashlyticsErrorTracker
 import com.rafaelaguerra.synctask.data.device.PhoneStateAlarmScheduler
 import com.rafaelaguerra.synctask.data.local.AppManagedEventsLocalDataSource
 import com.rafaelaguerra.synctask.data.local.PremiumPreferencesLocalDataSource
@@ -27,6 +28,8 @@ class AppContainer(
 ) {
     private val appContext = context.applicationContext
 
+    val errorTracker = CrashlyticsErrorTracker()
+
     private val calendarLocalDataSource = CalendarLocalDataSource(appContext.contentResolver)
     private val phoneStateAlarmScheduler = PhoneStateAlarmScheduler(appContext)
     private val appManagedEventsLocalDataSource = AppManagedEventsLocalDataSource(appContext)
@@ -36,7 +39,7 @@ class AppContainer(
         context = appContext,
         premiumPreferences = premiumPreferencesLocalDataSource
     )
-    val appVersionGatekeeper = AppVersionGatekeeper(appContext)
+    val appVersionGatekeeper = AppVersionGatekeeper(appContext, errorTracker = errorTracker)
     val inAppUpdateCoordinator = InAppUpdateCoordinator(appContext)
 
     private val sharedContainer = SharedContainer(
@@ -44,7 +47,8 @@ class AppContainer(
         phoneStateScheduler = phoneStateAlarmScheduler,
         appManagedEventsStorage = appManagedEventsLocalDataSource,
         premiumBillingDataSource = playBillingDataSource,
-        premiumPreferencesStorage = premiumPreferencesLocalDataSource
+        premiumPreferencesStorage = premiumPreferencesLocalDataSource,
+        errorTracker = errorTracker
     )
 
     val createCalendarEventUseCase: CreateCalendarEventUseCase

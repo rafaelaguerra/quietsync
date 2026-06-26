@@ -2,6 +2,7 @@ package com.rafaelaguerra.synctask.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rafaelaguerra.synctask.domain.error.ErrorTracker
 import com.rafaelaguerra.synctask.domain.model.AppManagedEvent
 import com.rafaelaguerra.synctask.domain.model.CalendarEvent
 import com.rafaelaguerra.synctask.domain.model.PhoneState
@@ -29,6 +30,7 @@ import com.rafaelaguerra.synctask.resources.msg_end_after_start
 import com.rafaelaguerra.synctask.resources.msg_select_weekday
 import com.rafaelaguerra.synctask.resources.msg_title_required
 import com.rafaelaguerra.synctask.resources.msg_weekly_limit_reached
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,11 +50,18 @@ class MainViewModel(
     private val refreshPremiumStatusUseCase: RefreshPremiumStatusUseCase,
     private val getPremiumPriceUseCase: GetPremiumPriceUseCase,
     private val canCreateEventThisWeekUseCase: CanCreateEventThisWeekUseCase,
-    private val canEditExistingEventModeUseCase: CanEditExistingEventModeUseCase
+    private val canEditExistingEventModeUseCase: CanEditExistingEventModeUseCase,
+    private val errorTracker: ErrorTracker = ErrorTracker.NoOp
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MainUiState())
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
+
+    // Catches anything thrown inside a viewModelScope coroutine that isn't already
+    // wrapped in a Result, so even unexpected failures get reported instead of lost.
+    private val coroutineErrorHandler = CoroutineExceptionHandler { _, throwable ->
+        errorTracker.recordError(throwable, "Uncaught coroutine error in MainViewModel")
+    }
 
     init {
         observePremiumStatus()
@@ -197,7 +206,7 @@ class MainViewModel(
     // ─── Event list ──────────────────────────────────────────────────────────
 
     fun loadAppManagedEvents() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineErrorHandler) {
             _uiState.update { it.copy(isEventsLoading = true) }
             cleanupExpiredManagedEventsUseCase()
             getAppManagedEventsUseCase()
@@ -205,6 +214,7 @@ class MainViewModel(
                     _uiState.update { it.copy(isEventsLoading = false, appManagedEvents = events) }
                 }
                 .onFailure { error ->
+                    errorTracker.recordError(error, "Failed to load app-managed events")
                     _uiState.update {
                         it.copy(isEventsLoading = false, userMessage = error.toUiText())
                     }
@@ -213,7 +223,7 @@ class MainViewModel(
     }
 
     fun removeAppManagedEvent(eventId: Long) {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineErrorHandler) {
             removeAppManagedEventUseCase(eventId)
                 .onSuccess {
                     loadAppManagedEvents()
@@ -224,6 +234,7 @@ class MainViewModel(
                     }
                 }
                 .onFailure { error ->
+                    errorTracker.recordError(error, "Failed to remove app-managed event")
                     _uiState.update { it.copy(userMessage = error.toUiText()) }
                 }
         }
@@ -262,7 +273,7 @@ class MainViewModel(
             return
         }
 
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineErrorHandler) {
             _uiState.update { it.copy(isLoading = true) }
             updateAppManagedEventPhoneStateUseCase(eventId = eventId, phoneState = phoneState)
                 .onSuccess {
@@ -281,6 +292,7 @@ class MainViewModel(
                     }
                 }
                 .onFailure { error ->
+                    errorTracker.recordError(error, "Failed to update event phone state")
                     _uiState.update {
                         it.copy(isLoading = false, userMessage = error.toUiText())
                     }
@@ -346,7 +358,7 @@ class MainViewModel(
         )
         val createdAtMillis = currentTimeMillis()
 
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineErrorHandler) {
             _uiState.update { it.copy(isLoading = true, userMessage = null) }
 
             createCalendarEventUseCase(event)
@@ -388,38 +400,44 @@ class MainViewModel(
                             )
                         }
                     }.onFailure { error ->
+                        errorTracker.recordError(error, "Failed to schedule phone state for event")
                         _uiState.update { it.copy(isLoading = false, userMessage = error.toUiText()) }
                     }
                 }
                 .onFailure { error ->
+                    errorTracker.recordError(error, "Failed to create calendar event")
                     _uiState.update { it.copy(isLoading = false, userMessage = error.toUiText()) }
                 }
         }
     }
 
     fun refreshPremiumStatus(showErrors: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineErrorHandler) {
             refreshPremiumStatusUseCase()
                 .onSuccess { isPremium ->
                     _uiState.update { it.copy(isPremium = isPremium) }
                 }
                 .onFailure { error ->
+                    errorTracker.recordError(error, "Failed to refresh premium status")
                     if (showErrors) showMessage(error.toUiText())
                 }
         }
     }
 
     fun loadPremiumPrice() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineErrorHandler) {
             getPremiumPriceUseCase()
                 .onSuccess { price ->
                     _uiState.update { it.copy(premiumPriceLabel = price) }
+                }
+                .onFailure { error ->
+                    errorTracker.recordError(error, "Failed to load premium price")
                 }
         }
     }
 
     private fun observePremiumStatus() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineErrorHandler) {
             observePremiumStatusUseCase().collectLatest { isPremium ->
                 _uiState.update { it.copy(isPremium = isPremium) }
             }

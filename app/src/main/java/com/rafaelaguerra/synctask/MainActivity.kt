@@ -382,6 +382,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 .onFailure { error ->
+                    appContainer.errorTracker.recordError(error, "Premium purchase failed")
                     mainViewModel.setPurchaseInProgress(false)
                     mainViewModel.showMessage(error.toUiText())
                 }

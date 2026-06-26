@@ -14,5 +14,6 @@ fun SharedContainer.createMainViewModel(): MainViewModel = MainViewModel(
     refreshPremiumStatusUseCase = refreshPremiumStatusUseCase,
     getPremiumPriceUseCase = getPremiumPriceUseCase,
     canCreateEventThisWeekUseCase = canCreateEventThisWeekUseCase,
-    canEditExistingEventModeUseCase = canEditExistingEventModeUseCase
+    canEditExistingEventModeUseCase = canEditExistingEventModeUseCase,
+    errorTracker = errorTracker
 )

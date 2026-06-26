@@ -7,6 +7,7 @@ import com.rafaelaguerra.synctask.data.source.CalendarDataSource
 import com.rafaelaguerra.synctask.data.source.PhoneStateScheduler
 import com.rafaelaguerra.synctask.data.source.PremiumBillingDataSource
 import com.rafaelaguerra.synctask.data.source.PremiumPreferencesStorage
+import com.rafaelaguerra.synctask.domain.error.ErrorTracker
 import com.rafaelaguerra.synctask.domain.repository.EventSyncRepository
 import com.rafaelaguerra.synctask.domain.repository.PremiumRepository
 import com.rafaelaguerra.synctask.domain.usecase.CanCreateEventThisWeekUseCase
@@ -27,7 +28,8 @@ class SharedContainer(
     phoneStateScheduler: PhoneStateScheduler,
     appManagedEventsStorage: AppManagedEventsStorage,
     premiumBillingDataSource: PremiumBillingDataSource,
-    premiumPreferencesStorage: PremiumPreferencesStorage
+    premiumPreferencesStorage: PremiumPreferencesStorage,
+    val errorTracker: ErrorTracker = ErrorTracker.NoOp
 ) {
     private val eventSyncRepository: EventSyncRepository = EventSyncRepositoryImpl(
         calendarDataSource = calendarDataSource,

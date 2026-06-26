@@ -8,10 +8,12 @@ import androidx.core.content.pm.PackageInfoCompat
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.rafaelaguerra.synctask.R
+import com.rafaelaguerra.synctask.domain.error.ErrorTracker
 
 class AppVersionGatekeeper(
     private val context: Context,
-    private val remoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+    private val remoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance(),
+    private val errorTracker: ErrorTracker = ErrorTracker.NoOp
 ) {
 
     fun checkVersion(onResult: (VersionGateResult) -> Unit) {
@@ -25,7 +27,12 @@ class AppVersionGatekeeper(
         remoteConfig.setConfigSettingsAsync(configSettings)
             .continueWithTask { remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults) }
             .continueWithTask { remoteConfig.fetchAndActivate() }
-            .addOnCompleteListener {
+            .addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let { error ->
+                        errorTracker.recordError(error, "Remote Config fetch failed during version gate check")
+                    }
+                }
                 onResult(resolveVersionGateResult())
             }
     }
